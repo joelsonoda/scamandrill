@@ -2,7 +2,7 @@ name := "scamandrill"
 
 organization := "io.github.scamandrill"
 
-version := "2.0.1-MT-SNAPSHOT"
+version := "3.0.0-MT-SNAPSHOT"
 
 licenses += ("Apache-2.0", url("https://spdx.org/licenses/Apache-2.0"))
 
@@ -24,7 +24,6 @@ parallelExecution in Test := true
 libraryDependencies ++= {
   Seq(
     "com.typesafe.play" %% "play-ws"          % playVersion,
-    "com.typesafe"      % "config"            % "1.3.0",
     "org.slf4j"         % "slf4j-api"         % "1.7.21"
   ) ++ Seq(
     "org.scalatest"            %%  "scalatest"       % "2.2.6"     % "test->*",
