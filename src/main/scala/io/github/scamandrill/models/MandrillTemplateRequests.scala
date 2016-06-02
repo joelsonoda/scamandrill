@@ -1,5 +1,7 @@
 package io.github.scamandrill.models
 
+import play.api.libs.json.Json
+
 /**
   * A template
   *
@@ -19,21 +21,30 @@ case class MTemplate(name: String,
                      code: String,
                      text: String,
                      publish: Boolean,
-                     labels: List[String]) extends MandrillRequest
+                     labels: List[String])
+case object MTemplate {
+  implicit val writes = Json.writes[MTemplate]
+}
 
 /**
   * A template
   *
   * @param name - the name for the new template - must be unique
   */
-case class MTemplateInfo(name: String) extends MandrillRequest
+case class MTemplateInfo(name: String)
+case object MTemplateInfo {
+  implicit val writes = Json.writes[MTemplateInfo]
+}
 
 /**
   * Templates to filter
   *
   * @param label - an optional label to filter the templates
   */
-case class MTemplateList(label: String) extends MandrillRequest
+case class MTemplateList(label: String)
+case object MTemplateList {
+  implicit val writes = Json.writes[MTemplateList]
+}
 
 /**
   * The injection of a single piece of content into a single editable region
@@ -42,6 +53,9 @@ case class MTemplateList(label: String) extends MandrillRequest
   * @param content - the content to inject
   */
 case class MTemplateCnt(name: String, content: String)
+case object MTemplateCnt {
+  implicit val writes = Json.writes[MTemplateCnt]
+}
 
 /**
   * The template to render
@@ -52,5 +66,8 @@ case class MTemplateCnt(name: String, content: String)
   */
 case class MTemplateRender(template_name: String,
                            template_content: List[MTemplateCnt],
-                           merge_vars: List[MTemplateCnt]) extends MandrillRequest
+                           merge_vars: List[MTemplateCnt])
+case object MTemplateRender {
+  implicit val writes = Json.writes[MTemplateRender]
+}
 

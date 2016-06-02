@@ -9,6 +9,7 @@ licenses += ("Apache-2.0", url("https://spdx.org/licenses/Apache-2.0"))
 description := "Scala client for Mandrill api"
 
 scalaVersion := "2.11.7"
+val playVersion = "2.5.3"
 
 crossScalaVersions := Seq("2.10.5", "2.11.7")
 
@@ -21,18 +22,15 @@ resolvers ++= Seq("spray repo" at "http://repo.spray.io/")
 parallelExecution in Test := true
 
 libraryDependencies ++= {
-  val akkaV = "2.4.2"
   Seq(
-    "io.spray"          %% "spray-json"       % "1.3.2",
-    "com.typesafe.akka" %% "akka-actor"       % akkaV,
-    "com.typesafe.akka" %% "akka-http-experimental" % "2.4.2",
-    "com.typesafe.akka" %% "akka-http-spray-json-experimental" % "2.4.2",
+    "com.typesafe.play" %% "play-ws"          % playVersion,
     "com.typesafe"      % "config"            % "1.3.0",
-    "org.slf4j"         % "slf4j-api"         % "1.7.14"
+    "org.slf4j"         % "slf4j-api"         % "1.7.21"
   ) ++ Seq(
-    "org.specs2"        %%  "specs2"          % "2.3.13"    % "test",
-    "org.scalatest"     %%  "scalatest"       % "2.1.6"     % "test->*",
-    "com.typesafe.akka" %% "akka-testkit"     % akkaV % "test"
+    "org.scalatest"            %%  "scalatest"       % "2.2.6"     % "test->*",
+    "com.typesafe.play"        %%  "play-test"       % playVersion % "test",
+    "org.slf4j"                %   "slf4j-simple"    % "1.7.21"    % "test",
+    "de.leanovate.play-mockws" %%  "play-mockws"     % "2.5.0"     % "test"
   )
 }
 
@@ -52,7 +50,7 @@ publishMavenStyle := true
 
 pomIncludeRepository := { _ => false }
 
-pomExtra := (
+pomExtra :=
   <url>http://github.com/scamandrill/scamandrill</url>
     <scm>
       <connection>scm:git:github.com/scamandrill/scamandrill.git</connection>
@@ -71,4 +69,3 @@ pomExtra := (
         <url>https://graingert.co.uk/</url>
       </developer>
     </developers>
-  )
