@@ -2,7 +2,7 @@ name := "scamandrill"
 
 organization := "io.github.scamandrill"
 
-version := "3.0.0-MT-SNAPSHOT"
+version := "3.0.0-MT-RC0"
 
 licenses += ("Apache-2.0", url("https://spdx.org/licenses/Apache-2.0"))
 
