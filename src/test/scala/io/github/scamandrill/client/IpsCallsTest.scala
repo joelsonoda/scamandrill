@@ -2,13 +2,14 @@ package io.github.scamandrill.client
 
 import io.github.scamandrill.MandrillSpec
 import io.github.scamandrill.models._
+import scala.util.Success
 
 class IpsCallsTest extends MandrillSpec {
 
   "List" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=list" in {
     withClient("/ips/list.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
-      whenReady(instance.ipsList(), defaultTimeout)(_ shouldBe MandrillSuccess(List(
+      val instance = new MandrillClient(wc)
+      whenReady(instance.ipsList(), defaultTimeout)(_ shouldBe Success(List(
         MIpsResponse(
           ip = "127.0.0.1",
           created_at = "2013-01-01 15:50:21",
@@ -31,10 +32,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Info" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=info" in {
     withClient("/ips/info.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsInfo(MIpsIp(
         ip = "example ip"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsResponse(
           ip = "127.0.0.1",
           created_at = "2013-01-01 15:50:21",
@@ -57,11 +58,11 @@ class IpsCallsTest extends MandrillSpec {
 
   "Provision" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=provision" in {
     withClient("/ips/provision.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsProvision(MIpsPool(
         warmup = true,
         pool = "Main Pool"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsProvisionResp(
           requested_at = "2013-01-01 01:52:21"
         )
@@ -71,10 +72,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Start-warmup" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=start-warmup" in {
     withClient("/ips/start-warmup.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsStartWarmup(MIpsIp(
         ip = "127.0.0.1"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsResponse(
           ip = "127.0.0.1",
           created_at = "2013-01-01 15:50:21",
@@ -97,10 +98,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Cancel-warmup" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=cancel-warmup" in {
     withClient("/ips/cancel-warmup.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsCancelWarmup(MIpsIp(
         ip = "127.0.0.1"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsResponse(
           ip = "127.0.0.1",
           created_at = "2013-01-01 15:50:21",
@@ -123,12 +124,12 @@ class IpsCallsTest extends MandrillSpec {
 
   "Set-pool" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=set-pool" in {
     withClient("/ips/set-pool.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsSetPool(MIpsSetPool(
         ip = "127.0.0.1",
         pool = "Main Pool",
         create_pool = true
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsResponse(
           ip = "127.0.0.1",
           created_at = "2013-01-01 15:50:21",
@@ -151,10 +152,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Delete" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=delete" in {
     withClient("/ips/delete.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsDelete(MIpsIp(
         ip = "127.0.0.1"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsDelete(
           ip = "127.0.0.1",
           deleted = true
@@ -165,8 +166,8 @@ class IpsCallsTest extends MandrillSpec {
 
   "List-pools" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=list-pools" in {
     withClient("/ips/list-pools.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
-      whenReady(instance.ipsListPool(), defaultTimeout)(_ shouldBe MandrillSuccess(List(
+      val instance = new MandrillClient(wc)
+      whenReady(instance.ipsListPool(), defaultTimeout)(_ shouldBe Success(List(
         MIpsInfoPoolResponse(
           name = "Main Pool",
           created_at = "2013-01-01 12:15:12",
@@ -193,10 +194,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Pool-info" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=pool-info" in {
     withClient("/ips/pool-info.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsPoolInfo(MIpsPoolInfo(
         pool = "Main Pool"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsInfoPoolResponse(
           name = "Main Pool",
           created_at = "2013-01-01 12:15:12",
@@ -223,10 +224,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Create-pool" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=create-pool" in {
     withClient("/ips/create-pool.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsCreatePool(MIpsPoolInfo(
         pool = "New Pool"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsInfoPoolResponse(
           name = "Main Pool",
           created_at = "2013-01-01 12:15:12",
@@ -253,10 +254,10 @@ class IpsCallsTest extends MandrillSpec {
 
   "Delete-pool" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=delete-pool" in {
     withClient("/ips/delete-pool.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsDeletePool(MIpsPoolInfo(
         pool = "Delete Pool"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsDeletePoolResponse(
           pool = "Delete Pool",
           deleted = true
@@ -267,11 +268,11 @@ class IpsCallsTest extends MandrillSpec {
 
   "Check-custom-dns" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=check-custom-dns" in {
     withClient("/ips/check-custom-dns.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsCheckCustomDns(MIpsDns(
         ip = "127.0.0.1",
         domain = "mail1.example.mandrillapp.com"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsDnsResponse(
           valid = true,
           error = "mail128.example.mandrillapp.com does not exist"
@@ -282,11 +283,11 @@ class IpsCallsTest extends MandrillSpec {
 
   "Set-custom-dns" should "handle the example at https://www.mandrillapp.com/api/docs/ips.JSON.html#method=set-custom-dns" in {
     withClient("/ips/set-custom-dns.json") { wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.ipsSetCustomDns(MIpsDns(
         ip = "127.0.0.1",
         domain = "example domain"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(
+      )), defaultTimeout)(_ shouldBe Success(
         MIpsResponse(
           ip = "127.0.0.1",
           created_at = "2013-01-01 15:50:21",

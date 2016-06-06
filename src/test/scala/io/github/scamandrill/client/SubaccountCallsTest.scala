@@ -3,19 +3,19 @@ package io.github.scamandrill.client
 import io.github.scamandrill.MandrillSpec
 import io.github.scamandrill.models._
 import io.github.scamandrill.client.implicits._
-
+import scala.util.Success
 
 class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountAdd" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=add" in {
     withClient("/subaccounts/add.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountAdd(MSubaccount(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         notes = "Free plan user, signed up on 2013-01-01 12:00:00",
         custom_quota = 42
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(MSubaccountsResponse(
+      )), defaultTimeout)(_ shouldBe Success(MSubaccountsResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         custom_quota = 42,
@@ -32,10 +32,10 @@ class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountPause" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=pause" in {
     withClient("/subaccounts/pause.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountPause(MSubaccountInfo(
         id = "cust-123"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(MSubaccountsResponse(
+      )), defaultTimeout)(_ shouldBe Success(MSubaccountsResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         custom_quota = 42,
@@ -52,10 +52,10 @@ class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountResume" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=resume" in {
     withClient("/subaccounts/resume.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountResume(MSubaccountInfo(
         id = "cust-123"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(MSubaccountsResponse(
+      )), defaultTimeout)(_ shouldBe Success(MSubaccountsResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         custom_quota = 42,
@@ -72,13 +72,13 @@ class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountUpdate" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=update" in {
     withClient("/subaccounts/update.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountUpdate(MSubaccount(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         notes = "Free plan user, signed up on 2013-01-01 12:00:00",
         custom_quota = 42
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(MSubaccountsResponse(
+      )), defaultTimeout)(_ shouldBe Success(MSubaccountsResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         custom_quota = 42,
@@ -95,10 +95,10 @@ class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountInfo" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=info" in {
     withClient("/subaccounts/info.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountInfo(MSubaccountInfo(
         id = "cust-123"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(MSubaccountsInfoResponse(
+      )), defaultTimeout)(_ shouldBe Success(MSubaccountsInfoResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         notes = "Free plan user, signed up on 2013-01-01 12:00:00",
@@ -130,10 +130,10 @@ class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountList" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=list" in {
     withClient("/subaccounts/list.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountList(MSubaccountList(
         q = "cust-1"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(List(MSubaccountsResponse(
+      )), defaultTimeout)(_ shouldBe Success(List(MSubaccountsResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         custom_quota = 42,
@@ -150,10 +150,10 @@ class SubaccountCallsTest extends MandrillSpec {
 
   "SubaccountDelete" should "handle the example at https://www.mandrillapp.com/api/docs/subaccounts.JSON.html#method=delete" in {
     withClient("/subaccounts/delete.json"){ wc =>
-      val instance = new MandrillClient(wc, new APIKey())
+      val instance = new MandrillClient(wc)
       whenReady(instance.subaccountDelete(MSubaccountInfo(
         id = "cust-123"
-      )), defaultTimeout)(_ shouldBe MandrillSuccess(MSubaccountsResponse(
+      )), defaultTimeout)(_ shouldBe Success(MSubaccountsResponse(
         id = "cust-123",
         name = "ABC Widgets, Inc.",
         custom_quota = 42,

@@ -25,8 +25,7 @@ case class MVars(name: String, content: JsValue)
 case object MVars extends ((String, JsValue) => MVars) {
   implicit val writes = Json.writes[MVars]
 
-  @deprecated("should be MVars(name: String, content: JsValue)", "3.0.0")
-  def apply(name: String, content: String): MVars = new MVars(name, JsString(content))
+  def apply[T](name: String, content: T)(implicit cw: Writes[T]): MVars = new MVars(name, Json.toJson(content))
 }
 
 /**
@@ -71,17 +70,18 @@ case object MHeader {
   implicit val writes = Json.writes[MHeader]
 }
 
+case class MMetadataEntry(key: String, value: JsScalar)
+
 /**
   * An object containing metadata which will be represented as a JSON Object
   *
-  * @param underlying - the underlying data for
+  * @param entries - the metadata entries
   */
-case class MMetadata(underlying: Map[String, JsScalar]) extends Optional[MMetadata]
-case object MMetadata extends (Map[String,JsScalar] => MMetadata) {
+case class MMetadata(entries: MMetadataEntry*) extends Optional[MMetadata] {}
+case object MMetadata {
   implicit val writes = new Writes[MMetadata] {
-    override def writes(o: MMetadata): JsValue = Json.toJson(o.underlying)
+    override def writes(o: MMetadata): JsValue = Json.toJson(Map(o.entries.map(e => (e.key, e.value)):_*))
   }
-  def apply(entries: (String, JsScalar)*): MMetadata = MMetadata(Map(entries:_*))
 }
 
 /**
