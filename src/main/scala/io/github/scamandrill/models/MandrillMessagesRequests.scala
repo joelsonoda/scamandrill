@@ -95,7 +95,6 @@ case object MRecipientMetadata {
   implicit val writes = Json.writes[MRecipientMetadata]
 }
 
-// TODO: Metadata should be "key" -> JsScalarValue
 /**
   * The message to be sent
   *
