@@ -4,8 +4,6 @@ import io.github.scamandrill.MandrillSpec
 import play.api.Configuration
 import play.api.libs.ws.ahc.AhcWSClient
 
-import scala.util.Try
-
 class ScamandrillTest extends MandrillSpec {
   "Scamandrill" should "create a new WSClient using overridden values from application.Mandrill" in {
     val instance = Scamandrill(Configuration(
